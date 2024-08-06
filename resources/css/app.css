@@ -1,6 +1,13 @@
 body {
     font-family: 'Montserrat Variable', sans-serif;
+    /* background:linear-gradient(135deg, #f1f1fb, #f1f1fb); */
+    background:linear-gradient(135deg, #cae0f2, #f7f9fb);
+    /* background:linear-gradient(135deg, #fef9c7, #fcf9d0); */
+
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
 
 .content-center {
     display: flex;
@@ -15,4 +22,26 @@ body {
 
 .simple-dropdown {
     max-width: 250px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #426e8a;
+    border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #30576f;
 }

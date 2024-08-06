@@ -273,15 +273,34 @@ class SpotifyService {
         return $response->json();
     }
 
-    public function getUserPlaylistTracks($playlistId) {
+    public function getUserPlaylistTracks($playlistId, $total) {
         $user = auth()->user();
         $url = "https://api.spotify.com/v1/playlists/" . $playlistId . "/tracks";
 
         $token = $user->spotify_access_token;
 
-        $response = Http::withHeaders([
-            "Authorization" => "Bearer " . $token,
-        ])->get($url);
-        return $response->json();
+        $tracks = [];
+
+        
+        if ($total > 100) {
+            for ($i = 0; $i < ceil($total / 100); ++$i) {
+                $response = Http::withHeaders([
+                    "Authorization" => "Bearer " . $token,
+                ])->get($url, [
+                    "limit" => 100,
+                    "offset" => $i * 100
+                ]);
+
+                $tracks = array_merge($tracks, $response->json()['items']);
+            }
+        } else {
+            $response = Http::withHeaders([
+                "Authorization" => "Bearer " . $token,
+            ])->get($url);
+
+            $tracks = $response->json()['items'];
+        }
+
+        return $tracks;
     }
 }

@@ -57,17 +57,22 @@ const goToPage = (page) => {
                     <div class="d-flex flex-wrap" style="height: 100%; width: 80vw;">
                         <div v-for="(playlist, index) in paginatedPlaylists" :key="index" class="">
                             <div>
-                                <div class="card" @click="goToPlaylist(playlist.id)" style="margin: 1rem; height: 15.5rem; width: 14rem; border-radius: 15px 15px 9px 9px; cursor: pointer; background-color: #D5CFE1; margin-bottom: 0px">
-                                    <img v-if="playlist['images'] !== null" class="card-img-top" :src="playlist['images'][0]['url']" style="border-radius: 15px 15px 0 0"/>
+                                <div class="card" @click="goToPlaylist(playlist.id)" style="margin: 1rem; height: 15.5rem; width: 14rem; border-radius: 15px 15px 9px 9px; cursor: pointer; background-color: rgb(242, 205, 203); margin-bottom: 0px;">
+                                    <img v-if="playlist['images'] !== null" class="card-img-top" :src="playlist['images'][0]['url']" style="border-radius: 24px; padding: 16px 16px 8px 16px"/>
                                     <img v-else class="card-img-top" src="https://via.placeholder.com/150" />
-                                    <div class="d-flex h-100 align-items-center">
-                                        <span class="badge bg-primary ms-1" style="max-width: 45px; height: 20px; background-color: #A09ABC !important">{{playlist.tracks.total}}</span>
-                                        <span class="badge bg-primary ms-1" style="max-width: 45px; height: 20px; background-color: #A09ABC !important">{{playlist.public}}</span>
-                                        <span class="badge bg-primary ms-1" style="max-width: 45px; height: 20px; background-color: #A09ABC !important">i</span>
+                                    <div class="d-flex h-100 align-items-center justify-content-between" style="padding-left: 16px; padding-right: 16px; padding-bottom: 8px">
+                                      <div>
+                                        <span class="badge bg-primary" style=" height: 20px; background-color: #736134 !important">{{playlist.tracks.total}} Songs</span>
+                                        <span class="badge bg-primary ms-1" style="max-width: 60px; height: 20px; background-color: #736134 !important">
+                                          <!-- <img src="../../../icons/incognito.svg" ></img> -->
+                                          {{ playlist.public ? 'Public' : 'Private' }}
+                                        </span>
+                                      </div>
+                                        <span class="badge bg-primary ms-1" style="max-width: 45px; height: 20px; background-color: #736134 !important">i</span>
                                     </div>
                                 </div>
                                 <div class="h-100 mx-3" style="display: flex; align-items: center; height: 100%; width: 14rem;">
-                                    <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; font-size: 0.9rem; font-weight: 600">{{ playlist.name }}</span>
+                                    <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; font-size: 0.9rem; font-weight: 600; text-align: center">{{ playlist.name }}</span>
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,7 @@ class ShareInertiaData
         // Add user data to every Inertia page
         Inertia::share('user', function () use ($request) {
             return $request->user()
-                ? $request->user()->only('id', 'name', 'email', 'spotify_image', 'spotify_followers', 'spotify_product') // Customize as needed
+                ? $request->user()->only('id', 'name', 'email', 'spotify_image', 'spotify_followers', 'spotify_product', 'spotify_id', 'created_at')
                 : null;
         });
 

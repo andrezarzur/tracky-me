@@ -45,13 +45,25 @@ class PlaylistController extends Controller
         $spotifyService = new SpotifyService();
         $playlist = $spotifyService->getUserPlaylist($id);
 
-        $playlistTracks = collect($playlist['tracks']['items'])->map(function ($item) {
-            return $item['track'];
-        });
+        // $playlistTracks = collect($playlist['tracks']['items'])->map(function ($item) {
+        //     return $item['track'];
+        // });
 
+        $playlistTracks =  $spotifyService->getUserPlaylistTracks($playlist['id'], $playlist['tracks']['total']);
+
+        $flattenedCollection = collect($playlistTracks)->map(function ($item) {
+            if (isset($item['track'])) {
+                return array_merge($item, $item['track']);
+            }
+            return $item;
+        })->map(function ($item) {
+            unset($item['track']);
+            return $item;
+        });
+        
         return Inertia::render('Playlists/Show', [
             'playlist' => $playlist,
-            'playlistTracks' => $playlistTracks
+            'playlistTracks' => $flattenedCollection
         ]);
     }
 
