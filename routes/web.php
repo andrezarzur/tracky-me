@@ -35,6 +35,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/password-setup', [AuthController::class, 'setupPassword'])->name('password.setup');
 Route::post('/password-setup', [AuthController::class, 'storePassword'])->name('password.store');
 
-Route::get('/spotify/login', [SpotifyController::class, 'login'])->name('spotify.authorize');
+Route::get('/spotify/login', [SpotifyController::class, 'login'])->name('spotify.login');
 Route::get('/spotify/callback', [SpotifyController::class, 'callback'])->name('spotify.authorize');
 Route::post('/spotify/createPlaylist', [SpotifyController::class, 'createPlaylist'])->name('spotify.createPlaylist');
