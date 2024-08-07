@@ -205,7 +205,7 @@ const removeReference = (referenceIndex) => {
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <div>
-                    <span style="font-size: 1.5rem; cursor: pointer; color: #31708e" @click="goToHome()">SpotifyMe</span>
+                    <span style="font-size: 1.5rem; cursor: pointer; color: #31708e" @click="goToHome()">TrackyMe</span>
                 </div>
                 <div class="nav-item ms-5" role="presentation">
                     <a class="nav-link active" href="/home" style="color: #31708e">Recommender</a>

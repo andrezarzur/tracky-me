@@ -72,7 +72,6 @@ watch(previewUrl, () => {
       barWidth: 4,
       barGap: 2,
       barRadius: 2,
-      dragToSeek: true
     })
     
     wavesurfer.on('interaction', () => {
@@ -100,13 +99,16 @@ const updateReferenceSongs = (songs) => {
     <template #content>
       <div class="row h-100" style="padding: 0rem 17vw 0rem 17vw">
         <div style="background-color: rgb(96, 129, 150, 0.4);border-radius: 22px;padding: 1rem; min-height: 78vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)">
-          <ul class="nav nav-tabs mb-3 mx-3" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">Search for Tracks</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="recommendation-tab" data-bs-toggle="tab" data-bs-target="#recommendation" type="button" role="tab" aria-controls="recommendation" aria-selected="false">Recommendations</button>
-            </li>
+          <ul class="nav nav-tabs mb-3 mx-3 justify-content-between" id="myTab" role="tablist">
+            <div class="d-flex">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">Search for Tracks</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="recommendation-tab" data-bs-toggle="tab" data-bs-target="#recommendation" type="button" role="tab" aria-controls="recommendation" aria-selected="false">Recommendations</button>
+              </li>
+            </div>
+            <img class="mx-2" src="../../icons/Spotify_Logo_RGB_White.png" height="34" ></img>
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="search" role="tabpanel" aria-labelledby="search-tab">

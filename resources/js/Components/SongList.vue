@@ -44,7 +44,6 @@ watch(previewUrl, () => {
       barWidth: 4,
       barGap: 2,
       barRadius: 2,
-      dragToSeek: true
     })
     
     wavesurfer.on('interaction', () => {
@@ -170,7 +169,7 @@ const resetPlayer = () => {
               <input v-if="isRecommendations" class="form-check-input ms-3" type="checkbox" value="" @change="toggleTrackForPlaylist(result)" :checked="isTrackSelectedForPlaylist(result)">
             </div>
             <div class="col-2 d-flex align-items-center">
-              <img :src="result.album['images'][0]['url']" height="60" width="60" style="border-radius: 1rem"/>
+              <img :src="result.album['images'][0]['url']" height="60" width="60"/>
             </div>
             <div class="col-2 d-flex align-items-center">
               <span style="color: #31708e;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
@@ -196,6 +195,14 @@ const resetPlayer = () => {
             </div>
             <div>
               <div v-if="previewUrl !== '' && previewUrl === result.preview_url" class="mt-3" style="background-color: #A9CFC5; padding: 1rem; border-radius: 1rem;">
+                <div class="w-100 mb-3 d-flex justify-content-center align-items-center">
+                  <a :href="result.external_urls['spotify']" target="_blank" style="text-decoration: none; color: white;">
+                    <span style="color: #f7f9fb;  font-weight: 500;">
+                      See on
+                    </span>
+                    <img class="mx-2" src="../../icons/Spotify_Logo_RGB_White.png" height="28" ></img>
+                  </a>
+                </div>
                 <div class="row mx-2 align-items-center" >
                   <div class="col-1 px-0">
                     <div class="btn btn-primary" style="background-color: transparent; border: none;" data-bs-toggle="dropdown" aria-expanded="false">

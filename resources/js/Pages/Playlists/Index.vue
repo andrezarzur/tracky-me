@@ -52,13 +52,16 @@ const goToPage = (page) => {
     <template #content>
         <div class="d-flex justify-content-center">
             <div>
-                <h1 class="text-center">Playlists</h1>
+                <div class="d-flex justify-content-center align-items-center">
+                  <h1 class="text-center">Playlists</h1>
+                  <img class="mx-2" src="../../../icons/Spotify_Logo_RGB_Black.png" height="34" ></img>
+                </div>
                 <div class="justify-content-center d-flex">
                     <div class="d-flex flex-wrap" style="height: 100%; width: 80vw;">
                         <div v-for="(playlist, index) in paginatedPlaylists" :key="index" class="">
                             <div>
                                 <div class="card" @click="goToPlaylist(playlist.id)" style="margin: 1rem; height: 15.5rem; width: 14rem; border-radius: 15px 15px 9px 9px; cursor: pointer; background-color: rgb(242, 205, 203); margin-bottom: 0px;">
-                                    <img v-if="playlist['images'] !== null" class="card-img-top" :src="playlist['images'][0]['url']" style="border-radius: 24px; padding: 16px 16px 8px 16px"/>
+                                    <img v-if="playlist['images'] !== null" class="card-img-top" :src="playlist['images'][0]['url']" style="padding: 16px 16px 8px 16px"/>
                                     <img v-else class="card-img-top" src="https://via.placeholder.com/150" />
                                     <div class="d-flex h-100 align-items-center justify-content-between" style="padding-left: 16px; padding-right: 16px; padding-bottom: 8px">
                                       <div>

@@ -72,7 +72,6 @@ watch(previewUrl, () => {
       barWidth: 4,
       barGap: 2,
       barRadius: 2,
-      dragToSeek: true
     })
     
     wavesurfer.on('interaction', () => {

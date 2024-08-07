@@ -41,7 +41,6 @@ watch(previewUrl, () => {
       barWidth: 4,
       barGap: 2,
       barRadius: 2,
-      dragToSeek: true
     })
     
     wavesurfer.on('interaction', () => {
@@ -78,11 +77,17 @@ const updateReferenceSongs = (songs) => {
                     <div style="padding: 1rem; width: 100%; background-color: #688F85; border-radius: 22px 22px 0px 0px">
                         <div class="row h-100">
                           <div class="col-3 d-flex align-items-center justify-content-center">
-                            <img v-if="playlist['images'] !== null"  :src="playlist['images'][0]['url']" height="150" width="150" style="border-radius: 1rem"/>
+                            <img v-if="playlist['images'] !== null"  :src="playlist['images'][0]['url']" height="150" width="150"/>
                           </div>
                           <div class="col-9 d-flex flex-column justify-content-between">
                             <div class="d-flex flex-column">
-                              <span style="color: #f7f9fb;  font-weight: 500; font-size: 26px">{{ playlist.name }}</span>
+                              <div class="d-flex justify-content-between">
+                                <span style="color: #f7f9fb;  font-weight: 500; font-size: 26px">{{ playlist.name }}</span>
+                                <a :href="playlist.external_urls['spotify']" target="_blank" style="text-decoration: none; color: white;">
+                                    See on
+                                  <img class="mx-2" src="../../../icons/Spotify_Logo_RGB_White.png" height="34" ></img>
+                                </a>
+                              </div>
                               <span style="color: #f7f9fb;  font-weight: 500;">{{ playlist.description }}</span>
                             </div>
                             <div>

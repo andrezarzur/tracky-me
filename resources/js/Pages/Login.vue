@@ -33,7 +33,7 @@ const getUserAuth = async () => {
     <div style="height: 70vh; margin-top: 30vh" class="content-center">
       <div>
         <div class="text-center">
-          <h4>SpotifyMe</h4>
+          <h4>TrackyMe</h4>
         </div>
         <div>
             <form @submit.prevent="submit">
