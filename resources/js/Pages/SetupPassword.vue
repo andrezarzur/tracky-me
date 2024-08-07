@@ -9,7 +9,7 @@ const form = useForm({
 })
 
 const submit = () => {
-  form.post('http://127.0.0.1:8000/password-setup', {
+  form.post('/password-setup', {
     onFinish: () => {
       form.reset('password_confirmation');
     }
