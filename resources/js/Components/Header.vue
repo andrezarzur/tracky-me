@@ -14,7 +14,7 @@ const imageSrc = ref('../../icons/caret-down.svg');
 
 const recommendations = defineModel('recommendations');
 const referenceSongs = ref([]);
-const isSearching = ref(false);
+const isSearching = defineModel('isSearching');
 
 const changeImage = (newSrc)  => {
     imageSrc.value = newSrc;
@@ -201,7 +201,7 @@ const removeReference = (referenceIndex) => {
 </script>
 
 <template>
-    <header>
+    <header style="height: 8vh" class="d-flex flex-column justify-content-center">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <div>
@@ -338,6 +338,7 @@ const removeReference = (referenceIndex) => {
                         @click="searchAlike"
                         :loading="isSearching"
                         :disabled="referenceSongs.length == 0"
+                        data-bs-dismiss="modal"
                     />
                 </div>
             </div>
@@ -368,6 +369,7 @@ nav ul li a {
 .main_content {
     padding: 1rem;
     flex: 1 1 auto; /* Content will take the remaining space */
+    height: 92vh;
 }
 
 .floating-button {

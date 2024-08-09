@@ -139,7 +139,7 @@ const resetPlayer = () => {
 </script>
 
 <template>
-    <div v-if="songs || isSearchingSongs" class="row sticky-header align-items-center" style=" margin-right: 1rem; margin-left: 1rem; height: 40px; background-color: transparent; margin-top: 1rem">
+    <div v-if="songs || isSearchingSongs" class="row sticky-header align-items-center" style=" margin-right: 1rem; margin-left: 1rem; height: 40px; background-color: transparent; margin-top: 1rem;">
         <div class="col-3 d-flex justify-content-center" style="color: #f7f9fb; font-weight: 600">
             <PrimaryButton
             v-if="isRecommendations"
@@ -153,8 +153,7 @@ const resetPlayer = () => {
         <div class="col-2" style="color: #f7f9fb; font-weight: 600">Duration</div>
         <div class="col-1" style="color: #f7f9fb; font-weight: 600">Preview</div>
       </div>
-      <div v-if="songs && !isSearchingSongs" style="overflow-y: auto; max-height: 57vh; ">
-        <div>
+      <div v-if="songs && !isSearchingSongs" style="flex: 1; overflow-y: auto;">
           <div class="row track-row" :style="isTrackSelected(result) ? 'background-color: #F2CDCB' : ''" v-for="(result, index) in isPlaylist ? songs : isRecommendations ? songs['tracks'] : songs['tracks']['items']" :key="index">
             <div class="col-1 d-flex align-items-center justify-content-center" >
               <div 
@@ -224,26 +223,34 @@ const resetPlayer = () => {
               </div>
             </div>
           </div>
-        </div>
       </div>
-      <div v-else-if="isSearchingSongs" style="padding-top: 0.5rem">
+      <div v-else-if="isSearchingSongs" style="padding-top: 0.5rem; flex: 1; overflow-y: auto;">
         <h5 class="card-title placeholder-glow">
-          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem;"></span>
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
         </h5>
         <h5 class="card-title placeholder-glow">
-          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem;"></span>
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
         </h5>
         <h5 class="card-title placeholder-glow">
-          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem;"></span>
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
         </h5>
         <h5 class="card-title placeholder-glow">
-          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem;"></span>
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
         </h5>
         <h5 class="card-title placeholder-glow">
-          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem;"></span>
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
         </h5>
         <h5 class="card-title placeholder-glow">
-          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem;"></span>
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
+        </h5>
+        <h5 class="card-title placeholder-glow">
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
+        </h5>
+        <h5 class="card-title placeholder-glow">
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
+        </h5>
+        <h5 class="card-title placeholder-glow">
+          <span class="placeholder col-12" style="height: 72px; border-radius: 12px;margin: 0.5rem; width: 98%"></span>
         </h5>
       </div>
       <div v-else class="d-flex justify-content-center align-items-center" style="height: 95%">

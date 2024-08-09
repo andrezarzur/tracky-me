@@ -60,7 +60,7 @@ const goToPage = (page) => {
                     <div class="d-flex flex-wrap" style="height: 100%; width: 80vw;">
                         <div v-for="(playlist, index) in paginatedPlaylists" :key="index" class="">
                             <div>
-                                <div class="card" @click="goToPlaylist(playlist.id)" style="margin: 1rem; height: 15.5rem; width: 14rem; border-radius: 15px 15px 9px 9px; cursor: pointer; background-color: rgb(242, 205, 203); margin-bottom: 0px;">
+                                <div class="card" @click="goToPlaylist(playlist.id)" style="margin: 1rem; height: 15.5rem; width: 14rem; border-radius: 15px 15px 9px 9px; cursor: pointer; background-color: rgb(242, 205, 203); margin-bottom: 0px; display: flex; flex-direction: column;">
                                     <img v-if="playlist['images'] !== null" class="card-img-top" :src="playlist['images'][0]['url']" style="padding: 16px 16px 8px 16px"/>
                                     <img v-else class="card-img-top" src="https://via.placeholder.com/150" />
                                     <div class="d-flex h-100 align-items-center justify-content-between" style="padding-left: 16px; padding-right: 16px; padding-bottom: 8px">

@@ -1,3 +1,7 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Montserrat Variable', sans-serif;
     /* background:linear-gradient(135deg, #f1f1fb, #f1f1fb); */
@@ -6,7 +10,14 @@ body {
 
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    margin: 0;
+    height: 100%;
 }
+
+#app {
+    height: 100vh;
+  }
 
 
 .content-center {

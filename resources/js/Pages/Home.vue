@@ -18,6 +18,7 @@ const searchType = ref('track');
 const recommendations = ref(null);
 const searchGenre = ref('');
 const isSearchingSongs = ref(false);
+const isSearching = ref(false);
 const selectedTracksForPlaylist = ref([]);
 const volume = ref(20);
 const referenceSongs = ref([]);
@@ -87,7 +88,6 @@ watch(previewUrl, () => {
   }, 1);
 })
 
-
 const updateReferenceSongs = (songs) => {
   referenceSongs.value = songs;
 }
@@ -95,10 +95,10 @@ const updateReferenceSongs = (songs) => {
 </script>
 
 <template>
-  <Header :user="props.user" v-model:recommendations="recommendations" v-model:isSeaching="isSeaching" @update:referenceSongs="updateReferenceSongs" isHome>
+  <Header :user="props.user" v-model:recommendations="recommendations" v-model:isSearching="isSearching" @update:referenceSongs="updateReferenceSongs" isHome>
     <template #content>
       <div class="row h-100" style="padding: 0rem 17vw 0rem 17vw">
-        <div style="background-color: rgb(96, 129, 150, 0.4);border-radius: 22px;padding: 1rem; min-height: 78vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)">
+        <div style="background-color: rgb(96, 129, 150, 0.4);border-radius: 22px;padding: 1rem; height: 80vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
           <ul class="nav nav-tabs mb-3 mx-3 justify-content-between" id="myTab" role="tablist">
             <div class="d-flex">
               <li class="nav-item" role="presentation">
@@ -110,38 +110,39 @@ const updateReferenceSongs = (songs) => {
             </div>
             <img class="mx-2" src="../../icons/Spotify_Logo_RGB_White.png" height="34" ></img>
           </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="search" role="tabpanel" aria-labelledby="search-tab">
-              <div class="col-12" style="height: 64vh">
+          <div class="tab-content" id="myTabContent" style="flex: 1; min-height: 0px;">
+            <div class="tab-pane fade show active h-100" id="search" role="tabpanel" aria-labelledby="search-tab">
+              <div class="col-12 h-100" style="display: flex; flex-direction: column;">
   
-                <form @submit.prevent="submitForm" class="d-flex align-items-end ">
-                  <div class="ms-3">
-                    <!-- <label for="query" style="color: #f7f9fb; font-weight: 600;">Search Song</label> -->
-                    <input 
-                      type="text" 
-                      v-model="query" 
-                      id="query" 
-                      required 
-                      class="form-control" 
-                      placeholder="Track or Artist"
-                      aria-label="Small" 
-                      aria-describedby="inputGroup-sizing-sm"
-                      style="font-weight: 500; color:#31708e;"
-                    >
-                  </div>
-                  <div class="d-flex align-items-end">
+                <form @submit.prevent="submitForm" class="d-flex align-items-end justify-content-between">
+                  <div class="d-flex">
                     <div class="ms-3">
-                      <PrimaryButton
-                        label="Search"
-                        type="submit"
-                      />
+                      <input 
+                        type="text" 
+                        v-model="query" 
+                        id="query" 
+                        required 
+                        class="form-control" 
+                        placeholder="Track or Artist"
+                        aria-label="Small" 
+                        aria-describedby="inputGroup-sizing-sm"
+                        style="font-weight: 500; color:#31708e;"
+                      >
                     </div>
-                    <span class="ms-3" style="color: #f7f9fb; font-weight: 600">by</span>
-                    <div class="ms-3">
-                      <select class="form-select simple-dropdown" aria-label="Default select example" v-model="searchType" style="color: #31708e; font-weight: 500">
-                        <option value="track" selected>Track</option>
-                        <option value="artist">Artist</option>
-                      </select>
+                    <div class="d-flex align-items-end">
+                      <div class="ms-3">
+                        <PrimaryButton
+                          label="Search"
+                          type="submit"
+                        />
+                      </div>
+                      <span class="ms-3" style="color: #f7f9fb; font-weight: 600">by</span>
+                      <div class="ms-3">
+                        <select class="form-select simple-dropdown" aria-label="Default select example" v-model="searchType" style="color: #31708e; font-weight: 500">
+                          <option value="track" selected>Track</option>
+                          <option value="artist">Artist</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </form>
@@ -154,10 +155,16 @@ const updateReferenceSongs = (songs) => {
                 >
                 </SongList>
 
+                <div v-if="searchResults" class="me-3 mt-3 d-flex justify-content-end">
+                  <span style="color: #f7f9fb; font-weight: 600">
+                   Showing {{ searchResults.tracks.items.length }} results
+                  </span>
+                </div>
+
               </div>
             </div>
-            <div class="tab-pane fade" id="recommendation" role="tabpanel" aria-labelledby="recommendation-tab">
-              <div class="col-12" style="height: 64vh">
+            <div class="tab-pane fade h-100" id="recommendation" role="tabpanel" aria-labelledby="recommendation-tab">
+              <div class="col-12 h-100" style="display: flex; flex-direction: column;">
                   <div class="d-flex align-items-end">
                     <div class="ms-3">
                       <input 
@@ -179,9 +186,8 @@ const updateReferenceSongs = (songs) => {
                       />
                     </div>
                   </div>
-
                   <SongList
-                    :isSearchingSongs="isSearchingSongs"
+                    :isSearchingSongs="isSearching"
                     :songs="recommendations"
                     v-model:referenceSongs="referenceSongs"
                     :searchGenre="searchGenre"
@@ -189,6 +195,13 @@ const updateReferenceSongs = (songs) => {
                     v-model:selectedTracksForPlaylist="selectedTracksForPlaylist"
                   >
                   </SongList>
+
+                  <div v-if="recommendations" class="me-3 mt-3 d-flex justify-content-end">
+                    <span style="color: #f7f9fb; font-weight: 600">
+                     Showing {{ recommendations.tracks.length }} results
+                    </span>
+                  </div>
+  
               </div>
             </div>
           </div>

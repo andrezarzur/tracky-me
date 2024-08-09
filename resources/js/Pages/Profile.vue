@@ -14,7 +14,7 @@ const props = defineProps({
     <template #content>
         <div class="row h-100">
             <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
-                <div class="card p-4">
+                <div class="card p-4" style="height: 50%">
                     <div class="d-flex flex-column justify-content-between align-items-center h-100">
                         <div class="image d-flex flex-column justify-content-center align-items-center">
                             <img :src="props.user.spotify_image" height="100" width="100" class="bg-info rounded-circle"/>
