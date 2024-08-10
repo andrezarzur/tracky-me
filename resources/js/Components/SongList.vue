@@ -193,7 +193,7 @@ const resetPlayer = () => {
             </div>
             <div class="col-1 d-flex align-items-center">
               <div  @click="playPreview(result.preview_url)" >
-                <img class="toggle-button" src="../../icons/play.svg" height="34" width="34" v-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying && !isTrackSelected(result)" style="cursor: pointer"></img>
+                <img class="toggle-button" src="../../icons/play.svg" height="34" width="34" v-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl && !isTrackSelected(result)) || result.preview_url && !isPlaying && !isTrackSelected(result)" style="cursor: pointer"></img>
                 <img class="toggle-button" src="../../icons/play_white.svg" height="34" width="34" v-else-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying && isTrackSelected(result)" style="cursor: pointer"></img>
                 <img class="toggle-button" src="../../icons/pause.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && !isTrackSelected(result)" style="cursor: pointer"></img>
                 <img class="toggle-button" src="../../icons/pause_white.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && isTrackSelected(result)" style="cursor: pointer"></img>
