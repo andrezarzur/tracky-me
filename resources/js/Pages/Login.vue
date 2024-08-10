@@ -34,9 +34,9 @@ const getUserAuth = async () => {
     <div style="height: 100vh" class="content-center d-flex align-items-center">
       <div style="width: 50%" class="d-flex flex-column justify-content-center align-items-center">
         <div style="position: absolute;top: 0;margin-top: 40px;">
-          <span style="color: #31708e;  font-weight: 500; font-size: 48px">TrackyMe</span>
+          <span style="color: #292D2A;  font-weight: 500; font-size: 48px">TrackyMe</span>
         </div>
-        <div style="background-color: rgb(96, 129, 150, 0.4);border-radius: 22px; padding: 1rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); height: 460px; width: 350px" class="d-flex justify-content-center align-items-center">
+        <div style="background-color: #575b58;border-radius: 22px; padding: 1rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); height: 460px; width: 350px" class="d-flex justify-content-center align-items-center">
           <form @submit.prevent="submit" style="height: 100%">
             <div class="d-flex flex-column justify-content-between align-items-between" style="height: 90%">
               <div class="text-center d-flex justify-content-center align-items-center" style="height: 80px">
@@ -54,7 +54,7 @@ const getUserAuth = async () => {
                       class="form-control" 
                       aria-label="Small" 
                       aria-describedby="inputGroup-sizing-sm"
-                      style="font-weight: 500; color:#31708e; border-radius: 7px; border: solid 2px"
+                      style="font-weight: 500; color:#34897A; border-radius: 7px; border: solid 3px"
                     >
                 </div>
                 <div>
@@ -67,7 +67,7 @@ const getUserAuth = async () => {
                       placeholder="Password" 
                       aria-label="Small" 
                       aria-describedby="inputGroup-sizing-sm"
-                      style="font-weight: 500; color:#31708e; border-radius: 7px; border: solid 2px"
+                      style="font-weight: 500; color:#34897A; border-radius: 7px; border: solid 3px"
                     >
                 </div>
               </div>
@@ -96,7 +96,7 @@ const getUserAuth = async () => {
           </form>
         </div>
       </div>
-      <div style="width: 50%; height: 100%; background-color: rgb(96, 129, 150, 0.4);" class="d-flex flex-column justify-content-center align-items-center">
+      <div style="width: 50%; height: 100%; background-color:#34897A;" class="d-flex flex-column justify-content-center align-items-center">
         <span style="color:  #f7f9fb;  font-weight: 500; font-size: 30px; margin-bottom: 3rem; text-align: center">
           Your Next Favorite Songs, Curated for You
         </span>

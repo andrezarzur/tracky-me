@@ -151,10 +151,16 @@ const resetPlayer = () => {
         <div class="col-2" style="color: #f7f9fb; font-weight: 600">Artist</div>
         <div class="col-4" style="color: #f7f9fb; font-weight: 600">Name</div>
         <div class="col-2" style="color: #f7f9fb; font-weight: 600">Duration</div>
-        <div class="col-1" style="color: #f7f9fb; font-weight: 600">Preview</div>
+        <div class="col-1 d-flex justify-content-center align-items-center" style="color: #f7f9fb; font-weight: 600">
+          Preview
+          <div class="ms-2" style="display: none;">
+            <img class="toggle-button" src="../../icons/info-circle.svg" height="18" width="18">
+            </img>
+          </div>
+        </div>
       </div>
       <div v-if="songs && !isSearchingSongs" style="flex: 1; overflow-y: auto;">
-          <div class="row track-row" :style="isTrackSelected(result) ? 'background-color: #F2CDCB' : ''" v-for="(result, index) in isPlaylist ? songs : isRecommendations ? songs['tracks'] : songs['tracks']['items']" :key="index">
+          <div class="row track-row" :style="isTrackSelected(result) ? 'background-color: #34897A' : ''" v-for="(result, index) in isPlaylist ? songs : isRecommendations ? songs['tracks'] : songs['tracks']['items']" :key="index">
             <div class="col-1 d-flex align-items-center justify-content-center" >
               <div 
                 class="toggle-button" 
@@ -171,24 +177,26 @@ const resetPlayer = () => {
               <img :src="result.album['images'][0]['url']" height="60" width="60"/>
             </div>
             <div class="col-2 d-flex align-items-center">
-              <span style="color: #31708e;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
+              <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
                 {{ result.artists[0]['name'] }}
               </span>
             </div>
             <div class="col-4 d-flex align-items-center">
-              <span style="color: #31708e;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
+              <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
                 {{ result.name }}
               </span>
             </div>
             <div class="col-2 d-flex align-items-center">
-              <span style="color: #31708e;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
+              <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
                 {{ msToTime(result.duration_ms) }}
               </span>
             </div>
             <div class="col-1 d-flex align-items-center">
               <div  @click="playPreview(result.preview_url)" >
-                <img class="toggle-button" src="../../icons/play.svg" height="34" width="34" v-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying" style="cursor: pointer"></img>
-                <img class="toggle-button" src="../../icons/pause.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl" style="cursor: pointer"></img>
+                <img class="toggle-button" src="../../icons/play.svg" height="34" width="34" v-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying && !isTrackSelected(result)" style="cursor: pointer"></img>
+                <img class="toggle-button" src="../../icons/play_white.svg" height="34" width="34" v-else-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying && isTrackSelected(result)" style="cursor: pointer"></img>
+                <img class="toggle-button" src="../../icons/pause.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && !isTrackSelected(result)" style="cursor: pointer"></img>
+                <img class="toggle-button" src="../../icons/pause_white.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && isTrackSelected(result)" style="cursor: pointer"></img>
                 <img src="../../icons/play_disabled.svg" height="34" width="34" v-else></img>
               </div>
             </div>
@@ -255,11 +263,11 @@ const resetPlayer = () => {
       </div>
       <div v-else class="d-flex justify-content-center align-items-center" style="height: 95%">
         <div class="toggle-button d-flex flex-column justify-content-center align-items-center" v-if="!isRecommendations">
-          <img src="../../icons/no_search.svg" height="340" width="340"></img>
+          <img src="../../icons/no_search_green.svg" height="340" width="340"></img>
           <span style="color:  #f7f9fb;  font-weight: 600; font-size: 20px">Start by searching for a track</span>
         </div>
         <div class="toggle-button d-flex flex-column justify-content-center align-items-center h-100" v-else>
-          <img src="../../icons/bird.svg" height="340" width="340"></img>
+          <img src="../../icons/bird_green.svg" height="340" width="340"></img>
           <span style="color:  #f7f9fb;  font-weight: 600; font-size: 20px">Try using the recommendations builder</span>
         </div>
       </div>
@@ -309,6 +317,19 @@ const resetPlayer = () => {
   height: 20px;
   width: 20px;
   border: 0;
+}
+
+.toggle-button {
+  transition: transform 0.3s; /* Ensure smooth transition for all states */
+}
+
+.toggle-button:hover {
+  transform: scale(1.1); /* Scale up on hover */
+}
+
+.toggle-button:active {
+  transform: scale(1); /* Scale down on click */
+  transition: 0.2s;
 }
 
 input[type="range"]::-moz-range-track {

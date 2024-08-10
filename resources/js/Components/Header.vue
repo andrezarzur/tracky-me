@@ -205,13 +205,13 @@ const removeReference = (referenceIndex) => {
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <div>
-                    <span style="font-size: 1.5rem; cursor: pointer; color: #31708e" @click="goToHome()">TrackyMe</span>
+                    <span style="font-size: 1.5rem; cursor: pointer; color: #292D2A" @click="goToHome()">TrackyMe</span>
                 </div>
                 <div class="nav-item ms-5" role="presentation">
-                    <a class="nav-link active" href="/home" style="color: #31708e">Recommender</a>
+                    <a class="nav-link active" href="/home" style="color: #292D2A">Recommender</a>
                 </div>
                 <div class="nav-item ms-4" role="presentation">
-                    <a class="nav-link active" href="/playlists" style="color: #31708e">Playlists</a>
+                    <a class="nav-link active" href="/playlists" style="color: #292D2A">Playlists</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -220,7 +220,7 @@ const removeReference = (referenceIndex) => {
                     type="button" id="dropdownMenuButton2" 
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
-                    style="background: transparent; color: #31708e; border-color: #31708e"
+                    style="background: transparent; color: #292D2A; border-color: #292D2A"
                     @mouseenter="changeImage('../../icons/caret-down_white.svg.svg')" 
                     @mouseleave="changeImage('../../icons/caret-down.svg.svg')" 
                 >
@@ -254,7 +254,7 @@ const removeReference = (referenceIndex) => {
             type="submit"
             class="btn" 
             data-bs-toggle="modal" data-bs-target="#exampleModal"
-            style="background-color: #5085a5; color: #f7f9fb; padding: 13px; border-radius: 50%;"
+            style="background-color: #34897A; color: #f7f9fb; padding: 13px; border-radius: 50%;"
         >
             <img src="../../icons/file-earmark-music.svg" height="30" width="30"></img>
         </button>
@@ -264,7 +264,7 @@ const removeReference = (referenceIndex) => {
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="background-color: #f7f9fb; border-radius: 12px">
-                <div class="modal-header" style="background-color: #8fc1e3; color: white; border-radius: 12px 12px 26px 26px;">
+                <div class="modal-header" style="background-color:#34897A; color: white; border-radius: 12px 12px 26px 26px;">
                     <h5 class="modal-title" id="exampleModalLabel">Recommendations Builder</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -274,18 +274,18 @@ const removeReference = (referenceIndex) => {
                             Tracks
                         </span>
                     </div>
-                    <div class="card" style="height: 30vh; margin-left: 2rem; margin-right: 2rem; margin-top: 0.4rem; margin-bottom: 0.4rem; background-color: #8fc1e3; overflow-y: scroll; padding-bottom: 0.7rem">
+                    <div class="card" style="height: 30vh; margin-left: 2rem; margin-right: 2rem; margin-top: 0.4rem; margin-bottom: 0.4rem; background-color: #646865; overflow-y: scroll; padding-bottom: 0.7rem">
                         <div v-if="referenceSongs.length > 0">
                             <div 
                                 class="card"
                                 style="margin: 0.7rem 0.7rem 0rem 0.7rem; background-color: #f7f9fb; color: white; border: none;" 
                                 v-for="(reference, index) in referenceSongs" :key="reference.id"
                             >
-                                <div class="card-body d-flex justify-content-between" style="padding: 1rem; color: #31708e; font-weight: 500">
-                                    <div class="d-flex align-items-center">
+                                <div class="card-body d-flex justify-content-between" style="padding: 1rem; color: #292D2A; font-weight: 500">
+                                    <div class="d-flex align-items-center" style="width: 90%">
                                         {{ reference.name }} - {{ reference.artists[0]['name'] }}
                                     </div>
-                                    <div @click="removeReference(index)" style="cursor: pointer">
+                                    <div @click="removeReference(index)" style="cursor: pointer" class="d-flex align-items-center">
                                         <img class="toggle-button"  src="../../icons/trash.svg" height="24" width="24" style="cursor: pointer"></img>
                                     </div>
                                 </div>
@@ -301,7 +301,7 @@ const removeReference = (referenceIndex) => {
                         </span>
                     </div>
                     <div class="d-flex justify-content-center" style="margin-top: 0.4rem">
-                        <select class="form-select" style="width: 100%; margin-left: 2rem; margin-right: 2rem; background-color: #8fc1e3; color: white;" aria-label="Default select example" v-model="searchGenre">
+                        <select class="form-select" style="width: 100%; margin-left: 2rem; margin-right: 2rem; background-color: #646865; color: white;" aria-label="Default select example" v-model="searchGenre">
                             <option value="" selected>Select a genre</option>
                             <option v-for="genre in genreOptions" :key="genre.value" :value="genre.value" selected>{{ genre.label }}</option>
                         </select>
@@ -312,7 +312,7 @@ const removeReference = (referenceIndex) => {
                         </span>
                     </div>
                     <div class="d-flex justify-content-center" style="margin-top: 0.4rem">
-                        <select class="form-select" style="width: 100%; margin-left: 2rem; margin-right: 2rem; background-color: #8fc1e3; color: white;" aria-label="Default select example" v-model="recommendType">
+                        <select class="form-select" style="width: 100%; margin-left: 2rem; margin-right: 2rem; background-color: #646865; color: white;" aria-label="Default select example" v-model="recommendType">
                             <option value="track" selected>Track</option>
                             <option value="artist">Artist</option>
                         </select>
@@ -329,16 +329,18 @@ const removeReference = (referenceIndex) => {
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer" style="background-color: #8fc1e3">
+                <div class="modal-footer" style="background-color:#34897A">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <PrimaryButton
                         v-if="isHome"
                         label="Get Recommendations"
+                        class="rec-button"
                         type="submit"
                         @click="searchAlike"
                         :loading="isSearching"
                         :disabled="referenceSongs.length == 0"
                         data-bs-dismiss="modal"
+                        style="border: none !important;"
                     />
                 </div>
             </div>
@@ -381,7 +383,7 @@ nav ul li a {
 }
 
 .profile-dropdown:hover {
-    background-color: #31708e !important;
+    background-color: #292D2A !important;
     transition: 0.5s;
 }
 
@@ -395,4 +397,11 @@ nav ul li a {
     color: red;
   }
   
+</style>
+
+<style css> 
+
+.rec-button > .btn {
+    border: none !important;
+}
 </style>

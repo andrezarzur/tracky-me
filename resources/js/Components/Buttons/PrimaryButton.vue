@@ -42,7 +42,7 @@ const emit = defineEmits(['click']);
       class="btn" 
       :disabled="props.disabled || props.loading"
       @click="emit('click')"
-      style="background-color: #5085a5; color: #f7f9fb"
+      style="background-color: #34897A; color: #f7f9fb"
     >
       <div class="spinner-border spinner-border-sm" role="status" v-if="loading">
         <span class="visually-hidden">Loading...</span>

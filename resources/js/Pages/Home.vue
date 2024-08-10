@@ -98,7 +98,7 @@ const updateReferenceSongs = (songs) => {
   <Header :user="props.user" v-model:recommendations="recommendations" v-model:isSearching="isSearching" @update:referenceSongs="updateReferenceSongs" isHome>
     <template #content>
       <div class="row h-100" style="padding: 0rem 17vw 0rem 17vw">
-        <div style="background-color: rgb(96, 129, 150, 0.4);border-radius: 22px;padding: 1rem; height: 80vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
+        <div style="background-color: #575b58;border-radius: 22px;padding: 1rem; height: 80vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
           <ul class="nav nav-tabs mb-3 mx-3 justify-content-between" id="myTab" role="tablist">
             <div class="d-flex">
               <li class="nav-item" role="presentation">

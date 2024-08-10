@@ -72,9 +72,9 @@ const updateReferenceSongs = (songs) => {
   <Header :user="props.user" @update:referenceSongs="updateReferenceSongs">
     <template #content>
         <div class="d-flex justify-content-center row h-100" style="padding: 0rem 20vw 0rem 20vw">
-            <div style="background-color: rgb(96, 129, 150, 0.4);border-radius: 22px; padding-bottom: 1rem; padding-right: 0rem;  height: 80vh; padding-left: 0rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
+            <div style="background:linear-gradient(180deg, #897351, #575b58 );border-radius: 22px; padding-bottom: 1rem; padding-right: 0rem;  height: 80vh; padding-left: 0rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
                 <div>
-                    <div style="padding: 1rem; width: 100%; background-color: #688F85; border-radius: 22px 22px 0px 0px">
+                    <div style="padding: 1rem; width: 100%; ; border-radius: 22px 22px 0px 0px">
                         <div class="row h-100">
                           <div class="col-3 d-flex align-items-center justify-content-center">
                             <img v-if="playlist['images'] !== null"  :src="playlist['images'][0]['url']" height="150" width="150"/>

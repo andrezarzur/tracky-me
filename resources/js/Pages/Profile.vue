@@ -43,7 +43,7 @@ const props = defineProps({
 <style scoped>
 .card {
     width: 350px;
-    background-color: rgb(96, 129, 150, 0.3);
+    background-color: #575b58;
     border: none;
     transition: all 0.5s;
 }
@@ -94,6 +94,6 @@ const props = defineProps({
 }
 
 .date {
-    background-color: #5085A5
+    background-color: #34897A
 }
 </style>
