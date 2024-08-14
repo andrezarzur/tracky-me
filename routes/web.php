@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SpotifyController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PlaylistController;
+use App\Http\Controllers\RecommenderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,6 +22,7 @@ use Inertia\Inertia;
 
 Route::middleware(['auth', 'check.spotify.token', 'password.set'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/recommender', [RecommenderController::class, 'index'])->name('recommender');
     Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
     Route::get('/playlists/{playlist}', [PlaylistController::class, 'show'])->name('playlists.show');

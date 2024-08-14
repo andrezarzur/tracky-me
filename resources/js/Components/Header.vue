@@ -208,7 +208,7 @@ const removeReference = (referenceIndex) => {
                     <span style="font-size: 1.5rem; cursor: pointer; color: #292D2A" @click="goToHome()">TrackyMe</span>
                 </div>
                 <div class="nav-item ms-5" role="presentation">
-                    <a class="nav-link active" href="/home" style="color: #292D2A">Recommender</a>
+                    <a class="nav-link active" href="/recommender" style="color: #292D2A">Recommender</a>
                 </div>
                 <div class="nav-item ms-4" role="presentation">
                     <a class="nav-link active" href="/playlists" style="color: #292D2A">Playlists</a>

@@ -118,12 +118,12 @@ class SpotifyService {
         $redirectUri = config('services.spotify.redirect');
 
         $query = http_build_query([
+            // 'show_dialog' => 'true',
             'response_type' => 'code',
             'client_id' => $clientId,
             'scope' => 'user-read-private user-read-email playlist-modify-private playlist-read-private playlist-read-collaborative',
             'redirect_uri' => $redirectUri,
             'state' => csrf_token(),
-            'show_dialog' => true
         ]);
 
         return $url . '?' . $query;
