@@ -140,7 +140,7 @@ const resetPlayer = () => {
 
 <template>
     <div v-if="songs || isSearchingSongs" class="row sticky-header align-items-center" style=" margin-right: 1rem; margin-left: 1rem; height: 40px; background-color: transparent; margin-top: 1rem;">
-        <div class="col-3 d-flex justify-content-center" style="color: #f7f9fb; font-weight: 600">
+      <div class="col-3 d-flex justify-content-center" style="color: #f7f9fb; font-weight: 600">
             <PrimaryButton
             v-if="isRecommendations"
             label="Toggle All"
@@ -160,77 +160,82 @@ const resetPlayer = () => {
         </div>
       </div>
       <div v-if="songs && !isSearchingSongs" style="flex: 1; overflow-y: auto;">
-          <div class="row track-row" :style="isTrackSelected(result) ? 'background-color: #34897A' : ''" v-for="(result, index) in isPlaylist ? songs : isRecommendations ? songs['tracks'] : songs['tracks']['items']" :key="index">
-            <div class="col-1 d-flex align-items-center justify-content-center" >
-              <div 
-                class="toggle-button" 
-                @click="toggleTrack(result)"
-                :style="{ pointerEvents: isSelectionFull() && !isTrackSelected(result) ? 'none' : 'auto' }"
-              >
-              <img class="toggle-button" src="../../icons/plus_disabled.svg" height="34" width="34" v-if="isSelectionFull() && !isTrackSelected(result)" style="cursor: pointer"></img>
-                <img class="toggle-button" src="../../icons/plus.svg" height="34" width="34" v-else-if="!isTrackSelected(result)" style="cursor: pointer"></img>
-                <img class="toggle-button"  src="../../icons/dash.svg" height="34" width="34" v-else style="cursor: pointer"></img>
+        <div v-if="isPlaylist ? (songs == 0 ? true : false) : isRecommendations ? (songs['tracks'] == 0 ? true : false) : (songs['tracks']['items'] == 0 ? true : false)" class="d-flex justify-content-center align-items-center h-100">
+          <span style="color: #f7f9fb; font-weight: 600; font-size: 20px">
+            No tracks found
+          </span>
+        </div>
+        <div class="row track-row" :style="isTrackSelected(result) ? 'background-color: #34897A' : ''" v-for="(result, index) in isPlaylist ? songs : isRecommendations ? songs['tracks'] : songs['tracks']['items']" :key="index">
+          <div class="col-1 d-flex align-items-center justify-content-center" >
+            <div 
+              class="toggle-button" 
+              @click="toggleTrack(result)"
+              :style="{ pointerEvents: isSelectionFull() && !isTrackSelected(result) ? 'none' : 'auto' }"
+            >
+            <img class="toggle-button" src="../../icons/plus_disabled.svg" height="34" width="34" v-if="isSelectionFull() && !isTrackSelected(result)" style="cursor: pointer"></img>
+              <img class="toggle-button" src="../../icons/plus.svg" height="34" width="34" v-else-if="!isTrackSelected(result)" style="cursor: pointer"></img>
+              <img class="toggle-button"  src="../../icons/dash.svg" height="34" width="34" v-else style="cursor: pointer"></img>
+            </div>
+            <input v-if="isRecommendations" class="form-check-input ms-3" type="checkbox" value="" @change="toggleTrackForPlaylist(result)" :checked="isTrackSelectedForPlaylist(result)">
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <img :src="result.album['images'][0]['url']" height="60" width="60"/>
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
+              {{ result.artists[0]['name'] }}
+            </span>
+          </div>
+          <div class="col-4 d-flex align-items-center">
+            <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
+              {{ result.name }}
+            </span>
+          </div>
+          <div class="col-2 d-flex align-items-center">
+            <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
+              {{ msToTime(result.duration_ms) }}
+            </span>
+          </div>
+          <div class="col-1 d-flex align-items-center">
+            <div  @click="playPreview(result.preview_url)" >
+              <img class="toggle-button" src="../../icons/play.svg" height="34" width="34" v-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl && !isTrackSelected(result)) || result.preview_url && !isPlaying && !isTrackSelected(result)" style="cursor: pointer"></img>
+              <img class="toggle-button" src="../../icons/play_white.svg" height="34" width="34" v-else-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying && isTrackSelected(result)" style="cursor: pointer"></img>
+              <img class="toggle-button" src="../../icons/pause.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && !isTrackSelected(result)" style="cursor: pointer"></img>
+              <img class="toggle-button" src="../../icons/pause_white.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && isTrackSelected(result)" style="cursor: pointer"></img>
+              <img src="../../icons/play_disabled.svg" height="34" width="34" v-else></img>
+            </div>
+          </div>
+          <div>
+            <div v-if="previewUrl !== '' && previewUrl === result.preview_url" class="mt-3" style="background-color: #A9CFC5; padding: 1rem; border-radius: 1rem;">
+              <div class="w-100 mb-3 d-flex justify-content-center align-items-center">
+                <a :href="result.external_urls['spotify']" target="_blank" style="text-decoration: none; color: white;">
+                  <span style="color: #f7f9fb;  font-weight: 500;">
+                    See on
+                  </span>
+                  <img class="mx-2" src="../../icons/Spotify_Logo_RGB_White.png" height="28" ></img>
+                </a>
               </div>
-              <input v-if="isRecommendations" class="form-check-input ms-3" type="checkbox" value="" @change="toggleTrackForPlaylist(result)" :checked="isTrackSelectedForPlaylist(result)">
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <img :src="result.album['images'][0]['url']" height="60" width="60"/>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
-                {{ result.artists[0]['name'] }}
-              </span>
-            </div>
-            <div class="col-4 d-flex align-items-center">
-              <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
-                {{ result.name }}
-              </span>
-            </div>
-            <div class="col-2 d-flex align-items-center">
-              <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
-                {{ msToTime(result.duration_ms) }}
-              </span>
-            </div>
-            <div class="col-1 d-flex align-items-center">
-              <div  @click="playPreview(result.preview_url)" >
-                <img class="toggle-button" src="../../icons/play.svg" height="34" width="34" v-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl && !isTrackSelected(result)) || result.preview_url && !isPlaying && !isTrackSelected(result)" style="cursor: pointer"></img>
-                <img class="toggle-button" src="../../icons/play_white.svg" height="34" width="34" v-else-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying && isTrackSelected(result)" style="cursor: pointer"></img>
-                <img class="toggle-button" src="../../icons/pause.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && !isTrackSelected(result)" style="cursor: pointer"></img>
-                <img class="toggle-button" src="../../icons/pause_white.svg" height="34" width="34" v-else-if="result.preview_url && isPlaying && result.preview_url === previewUrl && isTrackSelected(result)" style="cursor: pointer"></img>
-                <img src="../../icons/play_disabled.svg" height="34" width="34" v-else></img>
-              </div>
-            </div>
-            <div>
-              <div v-if="previewUrl !== '' && previewUrl === result.preview_url" class="mt-3" style="background-color: #A9CFC5; padding: 1rem; border-radius: 1rem;">
-                <div class="w-100 mb-3 d-flex justify-content-center align-items-center">
-                  <a :href="result.external_urls['spotify']" target="_blank" style="text-decoration: none; color: white;">
-                    <span style="color: #f7f9fb;  font-weight: 500;">
-                      See on
-                    </span>
-                    <img class="mx-2" src="../../icons/Spotify_Logo_RGB_White.png" height="28" ></img>
-                  </a>
+              <div class="row mx-2 align-items-center" >
+                <div class="col-1 px-0">
+                  <div class="btn btn-primary" style="background-color: transparent; border: none;" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="toggle-button" src="../../icons/volume-up.svg" height="34" width="34"></img>
+                  </div>
+                  <div class="dropdown-menu" style="width: 20vw; padding-left: 0.5rem; padding-right: 0.5rem">
+                    <div class="h-100 d-flex align-items-center"> 
+                      <input type="range" class="custom-range h-100" id="customRange1" v-model="volume" style="border-radius: 30px">
+                    </div>
+                  </div>
                 </div>
-                <div class="row mx-2 align-items-center" >
-                  <div class="col-1 px-0">
-                    <div class="btn btn-primary" style="background-color: transparent; border: none;" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img class="toggle-button" src="../../icons/volume-up.svg" height="34" width="34"></img>
-                    </div>
-                    <div class="dropdown-menu" style="width: 20vw; padding-left: 0.5rem; padding-right: 0.5rem">
-                      <div class="h-100 d-flex align-items-center"> 
-                        <input type="range" class="custom-range h-100" id="customRange1" v-model="volume" style="border-radius: 30px">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-10">
-                    <div id="waveform"></div>
-                  </div>
-                  <div class="col-1 px-0 d-flex align-items-center justify-content-center">
-                    <button type="button" class="btn-close" @click="resetPlayer()" aria-label="Close"></button>  
-                  </div>
+                <div class="col-10">
+                  <div id="waveform"></div>
+                </div>
+                <div class="col-1 px-0 d-flex align-items-center justify-content-center">
+                  <button type="button" class="btn-close" @click="resetPlayer()" aria-label="Close"></button>  
                 </div>
               </div>
             </div>
           </div>
+        </div>
       </div>
       <div v-else-if="isSearchingSongs" style="padding-top: 0.5rem; flex: 1; overflow-y: auto;">
         <h5 class="card-title placeholder-glow">

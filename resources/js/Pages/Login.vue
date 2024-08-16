@@ -31,17 +31,18 @@ const getUserAuth = async () => {
 
 
 <template>
-    <div style="height: 100vh" class="content-center d-flex align-items-center">
-      <div style="width: 50%" class="d-flex flex-column justify-content-center align-items-center">
+    <div style="height: 100vh" class="content-center d-flex align-items-center back-image-clear">
+      <div class="col d-flex flex-column justify-content-center align-items-center">
         <div style="position: absolute;top: 0;margin-top: 40px;">
           <span style="color: #292D2A;  font-weight: 500; font-size: 48px">TrackyMe</span>
         </div>
         <div style="background-color: #575b58;border-radius: 22px; padding: 1rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); height: 460px; width: 350px" class="d-flex justify-content-center align-items-center">
-          <form @submit.prevent="submit" style="height: 100%">
+          <form @submit.prevent="submit" style="height: 100%; padding-left: 1rem; padding-right: 1rem" class="d-flex flex-column justify-content-center align-items-center">
             <div class="d-flex flex-column justify-content-between align-items-between" style="height: 90%">
-              <div class="text-center d-flex justify-content-center align-items-center" style="height: 80px">
+              <div class="text-center d-flex flex-column justify-content-center align-items-center" style="height: 80px">
                 <!-- <h4>TrackyMe</h4> -->
-                <span style="color:  #f7f9fb;  font-weight: 500; font-size: 32px">Welcome!</span>
+                <span style="color:  #f7f9fb;  font-weight: 500; font-size: 32px">Login Now</span>
+                <span style="color:  #959595;  font-weight: 500; font-size: 14px">To create an account, use the Spotify login</span>
               </div>
               <div style="height: 100px" class="d-flex flex-column justify-content-between align-items-between">
                 <div>
@@ -76,6 +77,8 @@ const getUserAuth = async () => {
                   <PrimaryButton
                     label="Login"
                     type="submit"
+                    style="width: 100%"
+                    class="full-width"
                   />
                 </div>
                 <div class="content-center align-items-center">
@@ -84,7 +87,7 @@ const getUserAuth = async () => {
                   <hr class="horizontal-divisor"/>
                 </div>
                 <div class="content-center">
-                    <button @click="getUserAuth()" type="button" class="btn d-flex align-items-center" style="background-color: #1db954">
+                    <button @click="getUserAuth()" type="button" class="btn d-flex align-items-center w-100 justify-content-center" style="background-color: #1db954">
                       <span style="color:  #f7f9fb;  font-weight: 500; font-size: 16px">
                         Sign in with
                       </span>
@@ -96,8 +99,8 @@ const getUserAuth = async () => {
           </form>
         </div>
       </div>
-      <div style="width: 50%; height: 100%; background-color:#34897A;" class="d-flex flex-column justify-content-center align-items-center">
-        <span style="color:  #f7f9fb;  font-weight: 500; font-size: 30px; margin-bottom: 3rem; text-align: center">
+      <div style="height: 100%;" class="col d-flex flex-column justify-content-center align-items-center hide-on-mobile back-image">
+        <span style="color:  #f7f9fb; font-weight: 500; font-size: 30px; margin-bottom: 3rem; text-align: center">
           Your Next Favorite Songs, Curated for You
         </span>
         <img src="../../icons/undraw_recording_re_5xyq.svg" height="340" width="340"></img>
@@ -107,3 +110,27 @@ const getUserAuth = async () => {
       </div>
     </div>
 </template>
+
+<style scoped>
+@media (max-width: 970px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
+.back-image {
+  background: url('../../icons/tile_background.png') repeat 0 0;
+}
+
+.back-image-clear {
+  background: url('../../icons/tile_background_clear.png') repeat 0 0;
+}
+
+</style>
+
+<style css>
+
+.full-width > .btn {
+  width: 100%;
+}
+</style>
