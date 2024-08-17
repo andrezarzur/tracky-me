@@ -58,7 +58,7 @@ onUnmounted(() => {
                   <swiper-container
                     v-if="playlists.items.length > 0"
                     :slides-per-view="slidesPerView"
-                    space-between="50"
+                    space-between="20"
                     pagination-type="fraction"
                     pagination-el=".my-swiper"
                     grid-rows="2"

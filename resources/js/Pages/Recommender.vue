@@ -24,6 +24,8 @@ const volume = ref(20);
 const referenceSongs = ref([]);
 const playlistName = ref('');
 const uncheckedRecommendations = ref(false); 
+const header = ref(null);
+const isCreatingPlaylist = ref(false);
 
 const submitForm = async () => {
   try {
@@ -47,6 +49,9 @@ const submitForm = async () => {
 
 const createPlaylist = async () => {
   try {
+
+    isCreatingPlaylist.value = true;
+
     const response = await axios.post('/spotify/createPlaylist', {
         params: { 
             name: playlistName.value,
@@ -54,6 +59,13 @@ const createPlaylist = async () => {
         }
     });
     searchResults.value = response.data;
+
+    isCreatingPlaylist.value = false;
+
+    if (response.status === 200) {
+      header.value.triggerToast();
+    }
+
   } catch (error) {
     console.error('There was an error fetching the results:', error);
   }
@@ -100,11 +112,10 @@ watch(recommendations, () => {
     uncheckedRecommendations.value = false;
   }
 })
-
 </script>
 
 <template>
-  <Header :user="props.user" v-model:recommendations="recommendations" v-model:isSearching="isSearching" @update:referenceSongs="updateReferenceSongs" isHome>
+  <Header ref="header" :user="props.user" v-model:recommendations="recommendations" v-model:isSearching="isSearching" @update:referenceSongs="updateReferenceSongs" isHome>
     <template #content>
       <div class="row h-100" style="padding: 0rem 17vw 0rem 17vw">
         <div style="background:linear-gradient(180deg, #897351, #575b58 );border-radius: 22px;padding: 1rem; height: 80vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
@@ -142,6 +153,7 @@ watch(recommendations, () => {
                         aria-label="Small" 
                         aria-describedby="inputGroup-sizing-sm"
                         style="font-weight: 500; color:#31708e;"
+                        @click="click()"
                       >
                     </div>
                     <div class="d-flex align-items-end">
@@ -196,6 +208,7 @@ watch(recommendations, () => {
                       <PrimaryButton
                         label="Create Playlist"
                         type="submit"
+                        :loading="isCreatingPlaylist"
                         :disabled="playlistName == '' || recommendations == null || selectedTracksForPlaylist.length == 0" 
                         @click="createPlaylist()" 
                       />

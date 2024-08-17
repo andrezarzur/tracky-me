@@ -48,7 +48,7 @@ const emit = defineEmits(['click']);
         <span class="visually-hidden">Loading...</span>
       </div>
       <span v-else>
-        <span style="color: #f7f9fb; font-weight: 500">
+        <span style="color: #f7f9fb; font-weight: 500" v-if="!props.loading">
           {{ props.label }}
         </span>
       </span>

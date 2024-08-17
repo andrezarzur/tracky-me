@@ -23,6 +23,15 @@ const changeImage = (newSrc)  => {
 const goToHome = () => {
   window.location = '/';
 }
+const triggerToast = () => {
+    const toast = document.getElementById('successPlaylist')
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast)
+    toastBootstrap.show()    
+}
+
+defineExpose({
+    triggerToast
+})
 
 const fetchFromLocalStorage = () => {
     if (localStorage.getItem('recc')) {
@@ -57,6 +66,13 @@ const searchAlike = async () => {
         const response = await axios.get('/getRecommendations', {
             params: params
         });
+
+        if (response.status === 200) {
+            const toastLiveExample = document.getElementById('successRecommendations')
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastBootstrap.show()
+        }
+
         recommendations.value = response.data;
     } catch (error) {
         console.error('There was an error fetching the results:', error);
@@ -212,6 +228,21 @@ const removeReference = (referenceIndex) => {
                 </div>
                 <div class="nav-item ms-4" role="presentation">
                     <a class="nav-link active" href="/playlists" style="color: #292D2A">Playlists</a>
+                </div>
+                
+                <div class="toast-container position-fixed bottom-0 end-1 p-3">
+                    <div id="successRecommendations" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-body d-flex align-items-center justify-content-between" style="background-color: #34897A"> 
+                            Success! Check your recommendations.
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <div id="successPlaylist" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="toast-body d-flex align-items-center justify-content-between" style="background-color: #34897A"> 
+                            Success Creating Playlist!
+                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="dropdown">

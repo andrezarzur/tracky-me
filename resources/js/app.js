@@ -1,9 +1,11 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@fontsource-variable/montserrat';
 import '../css/app.css';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
+
 
 createInertiaApp({
   resolve: name => {

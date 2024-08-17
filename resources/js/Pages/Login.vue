@@ -31,8 +31,8 @@ const getUserAuth = async () => {
 
 
 <template>
-    <div style="height: 100vh" class="content-center d-flex align-items-center back-image-clear">
-      <div class="col d-flex flex-column justify-content-center align-items-center">
+    <div style="height: 100vh" class="content-center d-flex align-items-center">
+      <div class="h-100 col d-flex flex-column justify-content-center align-items-center back-image-clear">
         <div style="position: absolute;top: 0;margin-top: 40px;">
           <span style="color: #292D2A;  font-weight: 500; font-size: 48px">TrackyMe</span>
         </div>
@@ -99,7 +99,7 @@ const getUserAuth = async () => {
           </form>
         </div>
       </div>
-      <div style="height: 100%;" class="col d-flex flex-column justify-content-center align-items-center hide-on-mobile back-image">
+      <div class="h-100 col d-flex flex-column justify-content-center align-items-center hide-on-mobile back-image">
         <span style="color:  #f7f9fb; font-weight: 500; font-size: 30px; margin-bottom: 3rem; text-align: center">
           Your Next Favorite Songs, Curated for You
         </span>
@@ -123,7 +123,8 @@ const getUserAuth = async () => {
 }
 
 .back-image-clear {
-  background: url('../../icons/tile_background_clear.png') repeat 0 0;
+  background: url('../../icons/tile_background_kinda_clear.png') repeat 0 0;
+  background-position: right 253px center;
 }
 
 </style>
