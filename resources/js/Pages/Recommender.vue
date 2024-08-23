@@ -52,6 +52,12 @@ const createPlaylist = async () => {
 
     isCreatingPlaylist.value = true;
 
+    const tracksWithoutReference = selectedTracksForPlaylist.value;
+
+    if (includeReferenceTracks.value) {
+      selectedTracksForPlaylist.value = [...referenceSongs.value, ...selectedTracksForPlaylist.value];
+    }
+
     const response = await axios.post('/spotify/createPlaylist', {
         params: { 
             name: playlistName.value,
@@ -65,6 +71,8 @@ const createPlaylist = async () => {
     if (response.status === 200) {
       header.value.triggerToast();
     }
+
+    selectedTracksForPlaylist.value = tracksWithoutReference;
 
   } catch (error) {
     console.error('There was an error fetching the results:', error);
@@ -112,6 +120,9 @@ watch(recommendations, () => {
     uncheckedRecommendations.value = false;
   }
 })
+
+const includeReferenceTracks = ref(false);
+
 </script>
 
 <template>
@@ -212,6 +223,12 @@ watch(recommendations, () => {
                         :disabled="playlistName == '' || recommendations == null || selectedTracksForPlaylist.length == 0" 
                         @click="createPlaylist()" 
                       />
+                    </div>
+                    <div class="ms-3 d-flex align-items-center h-100" v-if="recommendations">
+                      <input class="form-check-input ms-3" type="checkbox" value="" v-model="includeReferenceTracks" style="margin-top: 0px">
+                       <span style="color: #f7f9fb; font-weight: 500" class="ms-2">
+                         Include reference tracks
+                       </span>
                     </div>
                   </div>
                   <SongList
