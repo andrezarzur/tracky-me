@@ -79,6 +79,7 @@ class SpotifyService {
                     'spotify_product' => $spotifyUser['product'] ?? null,
                     'spotify_followers' => $spotifyUser['followers']['total'] ?? null,
                     'password_set' => false,
+                    'metrics' => ['visits' => 0, 'timesSearched' => 0, 'recommendationsCreated' => 0, 'playlistsCreated' => 0],
                 ]
             );
             
