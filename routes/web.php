@@ -29,13 +29,13 @@ Route::middleware(['auth', 'check.spotify.token', 'password.set'])->group(functi
     Route::get('/getSpotifyResults', [SpotifyController::class, 'search'])->name('get.spotify.results');
     Route::get('/getRecommendations', [SpotifyController::class, 'recommendations'])->name('get.recommendations');
     Route::get('/profile', [UserController::class, 'show'])->name('profile.show');
+    Route::get('/password-setup', [AuthController::class, 'setupPassword'])->name('password.setup');
+    Route::post('/password-setup', [AuthController::class, 'storePassword'])->name('password.store');
 });
 
 Route::get('/', [AuthController::class, 'index'])->name('welcome');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::get('/password-setup', [AuthController::class, 'setupPassword'])->name('password.setup');
-Route::post('/password-setup', [AuthController::class, 'storePassword'])->name('password.store');
 
 Route::get('/spotify/login', [SpotifyController::class, 'login'])->name('spotify.login');
 Route::get('/spotify/callback', [SpotifyController::class, 'callback'])->name('spotify.authorize');

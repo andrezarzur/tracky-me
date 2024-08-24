@@ -9,8 +9,16 @@ class CheckPasswordSet
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && !Auth::user()->password_set) {
-            return redirect('/password-setup');
+        if (Auth::check()) {
+            $user = Auth::user();
+            
+            if (!$user->password_set && !$request->is('password-setup')) {
+                return redirect('/password-setup');
+            }
+
+            if ($user->password_set && $request->is('password-setup')) {
+                return redirect('/home'); 
+            }
         }
 
         return $next($request);

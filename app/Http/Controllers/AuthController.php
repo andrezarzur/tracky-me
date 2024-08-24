@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            $user = User::where('id', auth()->user()->id)->first();
+            $metrics = $user->metrics;
+            $metrics['visits'] += 1;
+            $user->update(['metrics' => $metrics]);
+
             return redirect('/home');
         }
 

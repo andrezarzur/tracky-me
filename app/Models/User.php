@@ -27,7 +27,8 @@ class User extends Authenticatable
         'spotify_expires_in',
         'spotify_image',
         'spotify_product',
-        'spotify_followers'
+        'spotify_followers',
+        'metrics'
     ];
 
     /**
@@ -49,5 +50,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'spotify_expires_in' => 'datetime',
         'password' => 'hashed',
+        'metrics' => 'array'
     ];
 }
