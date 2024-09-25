@@ -36,7 +36,7 @@ const getUserAuth = async () => {
         <div style="position: absolute;top: 0;margin-top: 40px;">
           <span style="color: #292D2A;  font-weight: 500; font-size: 48px">TrackyMe</span>
         </div>
-        <div style="background-color: #575b58;border-radius: 22px; padding: 1rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); height: 460px; width: 350px" class="d-flex justify-content-center align-items-center">
+        <div style="background-color: #575b58;border-radius: 22px; padding: 1rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); height: 460px; width: 350px" class="d-flex justify-content-center align-items-center modal-width">
           <form @submit.prevent="submit" style="height: 100%; padding-left: 1rem; padding-right: 1rem" class="d-flex flex-column justify-content-center align-items-center">
             <div class="d-flex flex-column justify-content-between align-items-between" style="height: 90%">
               <div class="text-center d-flex flex-column justify-content-center align-items-center" style="height: 80px">
@@ -116,6 +116,11 @@ const getUserAuth = async () => {
   .hide-on-mobile {
     display: none !important;
   }
+
+  .modal-width {
+    width: 300px !important;
+  }
+  
 }
 
 .back-image {
@@ -126,6 +131,7 @@ const getUserAuth = async () => {
   background: url('../../icons/tile_background_kinda_clear.png') repeat 0 0;
   background-position: right 253px center;
 }
+
 
 </style>
 

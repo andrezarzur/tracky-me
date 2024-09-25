@@ -128,15 +128,15 @@ const includeReferenceTracks = ref(false);
 <template>
   <Header ref="header" :user="props.user" v-model:recommendations="recommendations" v-model:isSearching="isSearching" @update:referenceSongs="updateReferenceSongs" isHome>
     <template #content>
-      <div class="row h-100" style="padding: 0rem 17vw 0rem 17vw">
-        <div style="background:linear-gradient(180deg, #897351, #575b58 );border-radius: 22px;padding: 1rem; height: 80vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
-          <ul class="nav nav-tabs mb-3 mx-3 justify-content-between" id="myTab" role="tablist">
+      <div class="row h-100 modal-padding" style="padding: 0rem 17vw 0rem 17vw">
+        <div style="background:linear-gradient(180deg, #897351, #575b58 );border-radius: 22px;padding: 1rem; height: 80vh; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;" class="modal-content">
+          <ul class="nav nav-tabs mb-3 mx-3 justify-content-between nav-spacing" id="myTab" role="tablist">
             <div class="d-flex">
               <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">Search for Tracks</button>
+                <button class="nav-link active nav-font-size" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab" aria-controls="search" aria-selected="true">Search</button>
               </li>
               <li class="nav-item" role="presentation">
-                <button class="nav-link  position-relative" id="recommendation-tab" @click="uncheckedRecommendations = false" data-bs-toggle="tab" data-bs-target="#recommendation" type="button" role="tab" aria-controls="recommendation" aria-selected="false">
+                <button class="nav-link  position-relative nav-font-size" id="recommendation-tab" @click="uncheckedRecommendations = false" data-bs-toggle="tab" data-bs-target="#recommendation" type="button" role="tab" aria-controls="recommendation" aria-selected="false">
                   Recommendations
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" v-if="uncheckedRecommendations">
                     Here!
@@ -145,9 +145,9 @@ const includeReferenceTracks = ref(false);
                 </button>
               </li>
             </div>
-            <img class="mx-2" src="../../icons/Spotify_Logo_RGB_White.png" height="34" ></img>
+            <img class="mx-2 img-spacing" src="../../icons/Spotify_Logo_RGB_White.png" height="34" ></img>
           </ul>
-          <div class="tab-content" id="myTabContent" style="flex: 1; min-height: 0px;">
+          <div class="tab-content content-responsive" id="myTabContent" style="flex: 1; min-height: 0px;">
             <div class="tab-pane fade show active h-100" id="search" role="tabpanel" aria-labelledby="search-tab">
               <div class="col-12 h-100" style="display: flex; flex-direction: column;">
   
@@ -203,7 +203,7 @@ const includeReferenceTracks = ref(false);
             </div>
             <div class="tab-pane fade h-100" id="recommendation" role="tabpanel" aria-labelledby="recommendation-tab">
               <div class="col-12 h-100" style="display: flex; flex-direction: column;">
-                  <div class="d-flex align-items-end">
+                  <div class="d-flex align-items-center">
                     <div class="ms-3">
                       <input 
                         type="text" 
@@ -257,6 +257,35 @@ const includeReferenceTracks = ref(false);
 </template>
 
 <style scoped>
+@media (max-width: 970px) {
+  .modal-padding {
+    padding: 0 !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }  
+
+  .modal-content {
+    height: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .nav-font-size {
+    font-size: 20px !important;
+  }
+
+  .nav-spacing {
+    justify-content: start !important;
+  }
+
+  .img-spacing {
+    display: none;
+  }
+  
+
+  .content-responsive {
+    padding-bottom: 60px;
+  }
+}
 .toggle-button {
   transition: transform 0.3s; /* Ensure smooth transition for all states */
 }

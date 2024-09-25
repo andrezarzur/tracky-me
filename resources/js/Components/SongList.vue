@@ -139,7 +139,7 @@ const resetPlayer = () => {
 </script>
 
 <template>
-    <div v-if="songs || isSearchingSongs" class="row sticky-header align-items-center" style=" margin-right: 1rem; margin-left: 1rem; height: 40px; background-color: transparent; margin-top: 1rem;">
+    <div v-if="songs || isSearchingSongs" class="row sticky-header align-items-center" style=" margin-right: 1rem; margin-left: 1rem; min-height: 40px; background-color: transparent; margin-top: 1rem;">
       <div class="col-3 d-flex justify-content-center" style="color: #f7f9fb; font-weight: 600">
             <PrimaryButton
             v-if="isRecommendations"
@@ -148,10 +148,10 @@ const resetPlayer = () => {
             @click="toggleAll()" 
           />
         </div>
-        <div class="col-2" style="color: #f7f9fb; font-weight: 600">Artist</div>
-        <div class="col-4" style="color: #f7f9fb; font-weight: 600">Name</div>
-        <div class="col-2" style="color: #f7f9fb; font-weight: 600">Duration</div>
-        <div class="col-1 d-flex justify-content-center align-items-center" style="color: #f7f9fb; font-weight: 600">
+        <div class="col-2 hide" style="color: #f7f9fb; font-weight: 600">Artist</div>
+        <div class="col-4 col-hidden" style="color: #f7f9fb; font-weight: 600">Name</div>
+        <div class="col-2 hide" style="color: #f7f9fb; font-weight: 600">Duration</div>
+        <div class="col-1 col-hidden d-flex justify-content-center align-items-center" style="color: #f7f9fb; font-weight: 600">
           Preview
           <div class="ms-2" style="display: none;">
             <img class="toggle-button" src="../../icons/info-circle.svg" height="18" width="18">
@@ -166,7 +166,7 @@ const resetPlayer = () => {
           </span>
         </div>
         <div class="row track-row" :style="isTrackSelected(result) ? 'background-color: #34897A' : ''" v-for="(result, index) in isPlaylist ? songs : isRecommendations ? songs['tracks'] : songs['tracks']['items']" :key="index">
-          <div class="col-1 d-flex align-items-center justify-content-center" >
+          <div class="col-1 d-flex align-items-center justify-content-center force-col-2" >
             <div 
               class="toggle-button" 
               @click="toggleTrack(result)"
@@ -178,25 +178,25 @@ const resetPlayer = () => {
             </div>
             <input v-if="isRecommendations" class="form-check-input ms-3" type="checkbox" value="" @change="toggleTrackForPlaylist(result)" :checked="isTrackSelectedForPlaylist(result)">
           </div>
-          <div class="col-2 d-flex align-items-center">
+          <div class="col-2 d-flex align-items-center force-col-3">
             <img :src="result.album['images'][0]['url']" height="60" width="60"/>
           </div>
-          <div class="col-2 d-flex align-items-center">
+          <div class="col-2 d-flex align-items-center hide">
             <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
               {{ result.artists[0]['name'] }}
             </span>
           </div>
-          <div class="col-4 d-flex align-items-center">
+          <div class="col-4 d-flex align-items-center force-col-5">
             <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
               {{ result.name }}
             </span>
           </div>
-          <div class="col-2 d-flex align-items-center">
+          <div class="col-2 d-flex align-items-center hide">
             <span style="color: #292D2A;  font-weight: 500" :style="isTrackSelected(result) ? 'color: #f7f9fb; font-weight: 600' : ''">
               {{ msToTime(result.duration_ms) }}
             </span>
           </div>
-          <div class="col-1 d-flex align-items-center">
+          <div class="col-1 d-flex align-items-center force-col-2">
             <div  @click="playPreview(result.preview_url)" >
               <img class="toggle-button" src="../../icons/play.svg" height="34" width="34" v-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl && !isTrackSelected(result)) || result.preview_url && !isPlaying && !isTrackSelected(result)" style="cursor: pointer"></img>
               <img class="toggle-button" src="../../icons/play_white.svg" height="34" width="34" v-else-if="(result.preview_url && isPlaying && result.preview_url !== previewUrl) || result.preview_url && !isPlaying && isTrackSelected(result)" style="cursor: pointer"></img>
@@ -268,17 +268,48 @@ const resetPlayer = () => {
       </div>
       <div v-else class="d-flex justify-content-center align-items-center" style="height: 95%">
         <div class="toggle-button d-flex flex-column justify-content-center align-items-center" v-if="!isRecommendations">
-          <img src="../../icons/no_search_green.svg" height="340" width="340"></img>
-          <span style="color:  #f7f9fb;  font-weight: 600; font-size: 20px">Start by searching for a track</span>
+          <img src="../../icons/no_search_green.svg" height="340" width="340" class="img-size"></img>
+          <span style="color:  #f7f9fb;  font-weight: 600; font-size: 20px" class="img-text-size">Start by searching for a track</span>
         </div>
         <div class="toggle-button d-flex flex-column justify-content-center align-items-center h-100" v-else>
-          <img src="../../icons/bird_green.svg" height="340" width="340"></img>
-          <span style="color:  #f7f9fb;  font-weight: 600; font-size: 20px">Try using the recommendations builder</span>
+          <img src="../../icons/bird_green.svg" height="340" width="340" class="img-size"></img>
+          <span style="color:  #f7f9fb;  font-weight: 600; font-size: 20px" class="img-text-size">Try using the recommendations builder</span>
         </div>
       </div>
 </template>
 
 <style scoped>
+
+@media (max-width: 970px) {
+  .img-size {
+    height: 220px;
+    width: 220px;
+  }
+
+  .img-text-size {
+    font-size: 17px !important;
+  }
+
+  .hide {
+    display: none !important;
+  }
+
+  .force-col-2 {
+    width: 16.6% !important;
+  }
+
+  .force-col-3 {
+    width: 25% !important;
+  }
+
+  .force-col-4 {
+    width: 33.3% !important;
+  }
+
+  .force-col-5 {
+    width: 41.6% !important;
+  }
+}
 
 .track-row {
     background-color: #f7f9fb;

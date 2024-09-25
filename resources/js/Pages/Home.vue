@@ -10,14 +10,14 @@ const props = defineProps({
 <template>
   <Header :user="props.user">
     <template #content>
-      <div class="row" style="height: 70%">
-        <div class="col-6">
-          <div class="d-flex flex-column justify-content-start align-items-start" style="height: 100%; padding-left: 3rem">
+      <div class="row restyle-container" style="height: 70%">
+        <div class="col restyle-container">
+          <div class="d-flex flex-column justify-content-start align-items-start restyle-title-container" style="height: 100%; padding-left: 3rem">
             <div class="d-flex flex-column">
-              <span style="color:  #292D2A;  font-weight: 500; font-size: 48px; text-align: left; width: 90%; margin-top: 3rem; margin-bottom: 3rem" class="responsive-title">
+              <span style="color:  #292D2A;  font-weight: 500; font-size: 48px; text-align: left; width: 90%; margin-top: 3rem; margin-bottom: 3rem" class="responsive-title restyle-title">
                 Personalized Playlists at Your Fingertips
               </span>
-              <span style="color: #292D2A; font-size: 18px; font-weight: 400; width: 90%">
+              <span style="color: #292D2A; font-size: 18px; font-weight: 400; width: 90%" class="restyle-title-content">
                 Use the recommendation builder to effortlessly discover new music tailored to your tastes. Whether you're looking for fresh tracks or hidden gems, this tool makes it easy to find and enjoy songs that resonate with you.
               </span>
             </div>
@@ -30,11 +30,11 @@ const props = defineProps({
               </a>
           </div>
         </div>
-        <div class="col-6 d-flex justify-content-center align-items-center">
+        <div class="col-6 d-flex justify-content-center align-items-center hide-on-mobile">
           <img src="../../icons/undraw_video_upload_3d4u.svg" style="max-height: 480px"></img>
         </div>
       </div>
-      <div class="row" style="height: 30%">
+      <div class="row hide-on-mobile" style="height: 30%">
         <div class="col-8 row">
           <div class="col-4 d-flex flex-column responsive-padding-blocks" style="padding-left: 3rem; padding-right: 3rem">
             <span style="font-weight: 500; font-size: 20px" class="mb-3">
@@ -84,6 +84,39 @@ const props = defineProps({
   .responsive-padding-blocks {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
+  }
+}
+
+@media (max-width: 970px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  .restyle-title {
+    font-size: 26px !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-top: 0px !important;
+  }
+
+  .restyle-title-content {
+    font-size: 16px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .restyle-title-container {
+    padding-left: 0px !important;
+    align-items: center !important;
+    height: auto !important;
+  }
+
+  .restyle-container {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 }
 </style>

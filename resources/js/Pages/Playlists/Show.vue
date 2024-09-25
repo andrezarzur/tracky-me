@@ -71,33 +71,33 @@ const updateReferenceSongs = (songs) => {
 <template>
   <Header :user="props.user" @update:referenceSongs="updateReferenceSongs">
     <template #content>
-        <div class="d-flex justify-content-center row h-100" style="padding: 0rem 20vw 0rem 20vw">
-            <div style="background:linear-gradient(180deg, #897351, #575b58 );border-radius: 22px; padding-bottom: 1rem; padding-right: 0rem;  height: 80vh; padding-left: 0rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
+        <div class="d-flex justify-content-center row h-100 modal-padding" style="padding: 0rem 20vw 0rem 20vw">
+            <div class="modal-content" style="background:linear-gradient(180deg, #897351, #575b58 );border-radius: 22px; padding-bottom: 1rem; padding-right: 0rem; padding-left: 0rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); display: flex; flex-direction: column;">
                 <div>
                     <div style="padding: 1rem; width: 100%; ; border-radius: 22px 22px 0px 0px">
                         <div class="row h-100">
                           <div class="col-3 d-flex align-items-center justify-content-center">
-                            <img v-if="playlist['images'] !== null"  :src="playlist['images'][0]['url']" height="150" width="150"/>
+                            <img v-if="playlist['images'] !== null"  :src="playlist['images'][0]['url']" height="150" width="150" class="responsive-image"/>
                           </div>
                           <div class="col-9 d-flex flex-column justify-content-between">
                             <div class="d-flex flex-column">
                               <div class="d-flex justify-content-between">
-                                <span style="color: #f7f9fb;  font-weight: 500; font-size: 26px">{{ playlist.name }}</span>
+                                <span style="color: #f7f9fb;  font-weight: 500; font-size: 26px" class="date-size">{{ playlist.name }}</span>
                                 <a :href="playlist.external_urls['spotify']" target="_blank" style="text-decoration: none; color: white;">
                                     See on
                                   <img class="mx-2" src="../../../icons/Spotify_Logo_RGB_White.png" height="34" ></img>
                                 </a>
                               </div>
-                              <span style="color: #f7f9fb;  font-weight: 500;">{{ playlist.description }}</span>
+                              <span style="color: #f7f9fb;  font-weight: 500;" class="content-size">{{ playlist.description }}</span>
                             </div>
                             <div>
-                              <span style="color: #f7f9fb;  font-weight: 500;">{{ playlist.tracks.total }} Tracks </span>
+                              <span style="color: #f7f9fb;  font-weight: 500;" class="content-size">{{ playlist.tracks.total }} Tracks </span>
                             </div>
                           </div>
                         </div>
                       </div>
                 </div>
-                <div style="padding-right: 1rem; padding-left: 1rem; display: flex; flex-direction: column; flex: 1; min-height: 0px;">
+                <div style="padding-right: 1rem; padding-left: 1rem; display: flex; flex-direction: column; flex: 1; min-height: 0px;" class="content-responsive">
                   <SongList
                     :isSearchingSongs="false"
                     :songs="playlistTracks"
@@ -117,3 +117,49 @@ const updateReferenceSongs = (songs) => {
     </template>
   </Header>
 </template>
+
+<style scoped>
+@media (max-width: 970px) {
+  .modal-padding {
+    padding: 0 !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }  
+
+  .modal-content {
+    height: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .nav-font-size {
+    font-size: 20px !important;
+  }
+
+  .nav-spacing {
+    justify-content: start !important;
+  }
+
+  .img-spacing {
+    display: none;
+  }
+  
+
+  .content-responsive {
+    padding-bottom: 60px;
+  }
+
+  .responsive-image {
+    height: 95px;
+    width: 95px;
+  }
+
+  .date-size {
+    font-size: 18px !important;
+  }
+
+  .content-size {
+    font-size: 16px !important;
+  }
+}
+
+</style>

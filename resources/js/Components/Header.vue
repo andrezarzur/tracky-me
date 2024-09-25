@@ -217,57 +217,115 @@ const removeReference = (referenceIndex) => {
 </script>
 
 <template>
-    <header style="height: 8vh" class="d-flex flex-column justify-content-center">
-        <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
-                <div>
-                    <span style="font-size: 1.5rem; cursor: pointer; color: #292D2A" @click="goToHome()">TrackyMe</span>
-                </div>
-                <div class="nav-item ms-5" role="presentation">
-                    <a class="nav-link active" href="/recommender" style="color: #292D2A">Recommender</a>
-                </div>
-                <div class="nav-item ms-4" role="presentation">
-                    <a class="nav-link active" href="/playlists" style="color: #292D2A">Playlists</a>
-                </div>
-                
-                <div class="toast-container position-fixed bottom-0 end-1 p-3">
-                    <div id="successRecommendations" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-body d-flex align-items-center justify-content-between" style="background-color: #34897A"> 
-                            Success! Check your recommendations.
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    <header style="height: 8vh;" class="d-flex flex-column justify-content-center">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <span class="navbar-brand" style="font-size: 1.5rem; cursor: pointer; color: #292D2A;" @click="goToHome()">TrackyMe</span>
+    
+                <!-- Regular Navbar for Larger Screens -->
+                <div class="collapse navbar-collapse d-none d-lg-block" id="navbarNavDesktop">
+                    <ul class="navbar-nav me-auto d-flex justify-content-between">
+                        <div>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/recommender" style="color: #292D2A;">Recommender</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/playlists" style="color: #292D2A;">Playlists</a>
+                            </li>
                         </div>
+                        <li class="nav-item dropdown">
+                            <button 
+                                class="btn btn-light action-button profile-dropdown" 
+                                type="button" id="dropdownMenuButton2" 
+                                data-bs-toggle="dropdown" 
+                                aria-expanded="false" 
+                                style="background: transparent; color: #292D2A; border-color: #292D2A"
+                                @mouseenter="changeImage('../../icons/caret-down_white.svg.svg')" 
+                                @mouseleave="changeImage('../../icons/caret-down.svg.svg')" 
+                            >
+                            <span style="font-weight: 600" >
+                                {{ props.user.name }}
+                            </span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2" style="padding: 6px 0px 0px 0px">
+                            <li style="padding: 0px 6px 6px 6px;"><a class="dropdown-item" href="/profile" style="border-radius: 12px">Profile</a></li>
+                                <li style="padding: 0px 6px 6px 6px;">
+                                    <a class="dropdown-item danger" href="/logout" style="border-radius: 12px;">
+                                        Logout
+                                        <img src="../../icons/box-arrow-right.svg" style="margin-left: 4px"></img>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Hamburger Button for Mobile -->
+                <button 
+                    class="navbar-toggler d-block d-lg-none" 
+                    type="button" 
+                    data-bs-toggle="offcanvas" 
+                    data-bs-target="#offcanvasNavbar" 
+                    aria-controls="offcanvasNavbar"
+                    style="border: none; color: #292D2A;"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <!-- Offcanvas Menu for Mobile -->
+                <div class="offcanvas offcanvas-end d-block d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-                    <div id="successPlaylist" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-body d-flex align-items-center justify-content-between" style="background-color: #34897A"> 
-                            Success Creating Playlist!
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/recommender" style="color: #292D2A;">Recommender</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/playlists" style="color: #292D2A;">Playlists</a>
+                            </li>
+                            <a 
+                            class="nav-link dropdown-toggle" 
+                            href="#" 
+                            id="navbarDropdown" 
+                            role="button" 
+                            data-bs-toggle="dropdown" 
+                            aria-expanded="false"
+                            style="color: #292D2A; font-weight: 600;"
+                        >
+                            {{ props.user.name }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                            <li>
+                                <a class="dropdown-item danger" href="/logout">
+                                    Logout
+                                    <img src="../../icons/box-arrow-right.svg" style="margin-left: 4px;"></img>
+                                </a>
+                            </li>
+                        </ul>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="dropdown">
-                <button 
-                    class="btn btn-light action-button profile-dropdown" 
-                    type="button" id="dropdownMenuButton2" 
-                    data-bs-toggle="dropdown" 
-                    aria-expanded="false" 
-                    style="background: transparent; color: #292D2A; border-color: #292D2A"
-                    @mouseenter="changeImage('../../icons/caret-down_white.svg.svg')" 
-                    @mouseleave="changeImage('../../icons/caret-down.svg.svg')" 
-                >
-                  <span style="font-weight: 600" >
-                    {{ props.user.name }}
-                  </span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2" style="padding: 6px 0px 0px 0px">
-                  <li style="padding: 0px 6px 6px 6px;"><a class="dropdown-item" href="/profile" style="border-radius: 12px">Profile</a></li>
-                    <li style="padding: 0px 6px 6px 6px;">
-                        <a class="dropdown-item danger" href="/logout" style="border-radius: 12px;">
-                            Logout
-                            <img src="../../icons/box-arrow-right.svg" style="margin-left: 4px"></img>
-                        </a>
-                    </li>
-                </ul>
+        </nav>
+    
+        <!-- Toasts (keep outside nav to avoid collapse issues) -->
+        <div class="toast-container position-fixed bottom-0 end-1 p-3">
+            <div id="successRecommendations" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body d-flex align-items-center justify-content-between" style="background-color: #34897A;"> 
+                    Success! Check your recommendations.
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+            <div id="successPlaylist" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-body d-flex align-items-center justify-content-between" style="background-color: #34897A;"> 
+                    Success Creating Playlist!
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
             </div>
         </div>
     </header>
@@ -299,7 +357,7 @@ const removeReference = (referenceIndex) => {
                     <h5 class="modal-title" id="exampleModalLabel">Recommendations Builder</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="height: 64vh;">
+                <div class="modal-body" style="height: 64vh; overflow-y: auto;">
                     <div class="d-flex justify-content-center">
                         <span style="font-size: 1.2rem; font-weight: 500; color: #27252a" class="label-required">
                             Tracks
@@ -381,16 +439,25 @@ const removeReference = (referenceIndex) => {
 
 <style scoped>
 /* Add your header styles here */
+
+@media (max-width: 970px) {
+    .main_content {
+        padding: 0rem 0 0rem 0 !important;
+        flex: 1 1 auto; /* Content will take the remaining space */
+        height: 92vh;
+    }
+}
+
 header {
     flex: 0 0 auto;
     color: #fff;
     padding: 1rem;
 }
-    nav ul {
+nav ul {
     list-style-type: none;
     padding: 0;
 }
-    nav ul li {
+nav ul li {
     display: inline-block;
     margin-right: 1rem;
 }
@@ -427,6 +494,31 @@ nav ul li a {
     content: ' * ';
     color: red;
   }
+
+  @media (max-width: 991px) { /* Bootstrap 'lg' breakpoint and below */
+  .navbar-collapse.d-none {
+      display: none !important;
+  }
+  .navbar-toggler.d-block {
+      display: block !important;
+  }
+  .offcanvas.d-block {
+      display: block !important;
+  }
+}
+
+/* Hide the offcanvas button and show the desktop navbar on larger screens */
+@media (min-width: 992px) { /* Bootstrap 'lg' breakpoint and above */
+  .navbar-collapse.d-none {
+      display: block !important;
+  }
+  .navbar-toggler.d-block {
+      display: none !important;
+  }
+  .offcanvas.d-block {
+      display: none !important;
+  }
+}
   
 </style>
 
